@@ -5,7 +5,7 @@ export default function SEO() {
     <Head>
       <title>Create Next App</title>
       {/* Primary Meta Tags */}
-      <title>Mark Boszormenyi{"'"}s Portfolio</title>
+      <title>Mark Boszormenyi&apos;s Portfolio</title>
       <meta name="title" content="Mark Boszormenyi's Portfolio" />
       <meta
         name="description"
