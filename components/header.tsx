@@ -41,6 +41,7 @@ export default function Header({ localeData }: { localeData: localeData }) {
               bgGradient="linear-gradient(110.12deg, #80D0C7 0%, #0093E9 68.83%)"
               backgroundClip="text"
               fontSize="2xl"
+              fontWeight="semibold"
             >
               Mark Boszormenyi
             </Text>
