@@ -10,11 +10,11 @@ const theme = extendTheme({
     body: `'Open Sans', sans-serif`,
   },
   styles: {
-    global: (props: GlobalStyleProps) => ({
+    global: {
       "html, body": {
-        bg: mode("whiteAlpha.700", "gray.700")(props),
+        bg: "gray.700",
       },
-    }),
+    },
   },
 })
 

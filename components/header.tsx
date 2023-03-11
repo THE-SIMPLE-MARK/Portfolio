@@ -11,21 +11,20 @@ import {
   MenuOptionGroup,
   MenuDivider,
   IconButton,
-  useColorMode,
   Grid,
+  Link,
 } from "@chakra-ui/react"
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons"
-import { useRouter } from "next/router"
+import NextLink from "next/link"
 
-export default function Header() {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const router = useRouter()
-  const { pathname, query, asPath, locale, locales } = router
+interface localeData {
+  locale: string | undefined
+  locales: string[] | undefined
+  defaultLocale: string | undefined
+}
 
-  function changeLocale(locale: string) {
-    // change just the locale and maintain all other route information including href's query
-    router.push({ pathname, query }, asPath, { locale })
-  }
+export default function Header({ localeData }: { localeData: localeData }) {
+  const { locale, locales, defaultLocale } = localeData
 
   const languageNameFormatter = new Intl.DisplayNames(locale, {
     type: "language",
@@ -66,26 +65,23 @@ export default function Header() {
               justifySelf="end"
             />
             <MenuList>
-              <MenuItem
-                onClick={toggleColorMode}
-                icon={colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
-              >
-                Switch to {colorMode === "dark" ? "light" : "dark"} mode
-              </MenuItem>
-              <MenuDivider />
               <MenuOptionGroup
-                defaultValue="english"
+                defaultValue={defaultLocale}
                 title="Language"
                 type="radio"
               >
                 {locales?.map(locale => (
-                  <MenuItemOption
-                    value={locale}
-                    key="locale"
-                    onClick={() => changeLocale(locale)}
+                  <Link
+                    textDecor="none !important"
+                    href="/"
+                    as={NextLink}
+                    locale={locale}
+                    key={locale}
                   >
-                    {languageNameFormatter.of(locale)}
-                  </MenuItemOption>
+                    <MenuItemOption value={locale}>
+                      {languageNameFormatter.of(locale)}
+                    </MenuItemOption>
+                  </Link>
                 ))}
               </MenuOptionGroup>
             </MenuList>
